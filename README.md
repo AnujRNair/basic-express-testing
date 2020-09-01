@@ -9,7 +9,14 @@ Includes
 - Prettier
 - ESLint
 
-## Commands
+## Setup
+
+- `npm i`
+- Run the server
+- Build frontend assets
+- Visit http://localhost:3000
+
+## All Helpful Commands
 
 Run the server:
 
@@ -30,6 +37,7 @@ Compile frontend assets:
 - Assets available at http://localhost:1988/
 
 ```
-$ npm run webpack:clean && npm run wepack:build
 $ npm run webpack:watch
+// or
+$ npm run webpack:clean && npm run wepack:build
 ```
