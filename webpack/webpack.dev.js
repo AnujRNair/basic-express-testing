@@ -10,7 +10,7 @@ module.exports = {
 
   // entry points
   entry: {
-    index: path.resolve('src', 'js', 'index.js'),
+    index: path.resolve('src', 'js', 'index.ts'),
   },
 
   output: {
@@ -46,7 +46,14 @@ module.exports = {
             options: {
               babelrc: false,
               plugins: [],
-              presets: [],
+              presets: [
+                [
+                  '@babel/preset-typescript',
+                  {
+                    allowNamespaces: true,
+                  },
+                ],
+              ],
             },
           },
         ],
