@@ -4,6 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "webpack:clean": "rm -rf public/dist",
+    "webpack:build": "npx webpack --config=webpack/webpack.dev.js",
+    "webpack:watch": "npx webpack-dev-server --config=webpack/webpack.dev.js",
     "eslint": "eslint .",
     "eslint:fix": "eslint . --fix"
   },
