@@ -11,5 +11,42 @@
   <body>
     <p>I'm the content</p>
   </body>
-  <script src="http://localhost:1988/index.bundle.js"></script>
+
+  <script>
+    function loadScript(src /*, removeCacheKey = false*/) {
+      const script = document.createElement('script');
+      script.src = src;
+      document.head.appendChild(script);
+    }
+
+    if ('serviceWorker' in navigator) {
+      const swTimeoutPromise = new Promise((_, reject) => {
+        window.setTimeout(() => reject(new Error('SW Reg Timeout')), 1500);
+      });
+
+      const swReadyPromise = Promise.race([
+        swTimeoutPromise,
+        navigator.serviceWorker.ready,
+      ]);
+
+      const swRegistration = Promise.all([
+        navigator.serviceWorker.register('/dist/sw.js', { scope: './' }),
+        swReadyPromise,
+      ]);
+
+      swRegistration
+        .then(() => {
+          console.log('success');
+          loadScript('/dist/index.bundle.js');
+        })
+        .catch(() => {
+          console.log('failed');
+          loadScript('/dist/index.bundle.js');
+        });
+    } else {
+      // no service worker support
+      console.log('service worker not supported');
+      loadScript('/dist/index.bundle.js');
+    }
+  </script>
 </html>
