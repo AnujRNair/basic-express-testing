@@ -1,5 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
+const CopyPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
@@ -83,6 +84,13 @@ module.exports = {
 
     new MiniCssExtractPlugin({
       filename: `[name].bundle.css`,
+    }),
+
+    new CopyPlugin({
+      patterns: [{ from: 'src/js/sw.js', to: 'sw.js' }],
+      options: {
+        concurrency: 100,
+      },
     }),
   ],
 };
