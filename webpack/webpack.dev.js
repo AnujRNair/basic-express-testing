@@ -27,6 +27,7 @@ module.exports = {
   devtool: 'inline-source-map',
 
   devServer: {
+    https: true,
     disableHostCheck: true,
     host: 'localhost',
     hot: true,
@@ -60,13 +61,13 @@ module.exports = {
       },
 
       {
-        test: /\.(css)$/,
+        test: /\.s[ac]ss$/i,
         use: [
           MiniCssExtractPlugin.loader,
           {
             loader: 'css-loader',
             options: {
-              modules: true,
+              modules: false,
             },
           },
           {

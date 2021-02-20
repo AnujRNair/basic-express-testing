@@ -1,0 +1,488 @@
+@mixin flex-break {
+  flex-basis: 100%;
+  width: 0;
+}
+
+@media (max-width: 1024px) {
+  .site-logo {
+    width: auto;
+    height: auto;
+    max-height: 124px; // logo height
+    background-size: contain; // properly fit the logo on the page
+    top: 40px; // compensate for extra user-info-bar line
+    margin: 0 10px 40px; // match top value
+
+    &__link {
+      width: auto;
+      margin: 0;
+      height: 0;
+      padding-top: 18%; /* ~(124 / 700 * 100%) */
+      max-height: 124px;
+    }
+  }
+
+  .user-info-bar {
+    display: flex; // flex allows us to reorder the uls below
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    left: 0;
+    width: 100%;
+    height: auto;
+    padding: 0;
+    background: none;
+
+    &__list {
+      margin: 0;
+
+      &:nth-child(odd) {
+        padding-right: 10px;
+      }
+    }
+
+    &__item {
+      margin: 0 2px;
+    }
+  }
+
+  // order should only be odd numbers, so that the breaker can be an even number anywhere
+  #userinfo {
+    &_username {
+      order: 1;
+    }
+
+    &_major {
+      order: 7;
+    }
+
+    &_stats {
+      order: 5;
+    }
+
+    &_minor {
+      order: 3;
+    }
+
+    &::after {
+      content: '';
+      order: 4;
+      @include flex-break;
+    }
+  }
+
+  // take the width of the page, and style it so it looks good on multiple lines
+  .main-menu {
+    width: 100%;
+    height: auto;
+    border-radius: 0;
+
+    &__list {
+      padding: 6px 0;
+    }
+
+    &__item {
+      display: inline-block;
+    }
+  }
+
+  .search-bar {
+    width: auto;
+  }
+
+  .page {
+    &__main-content {
+      width: 100%;
+      padding: 10px;
+      border-radius: 0;
+    }
+  }
+
+  .footer {
+    margin: 10px 0;
+
+    p {
+      margin: 0;
+    }
+  }
+
+  //
+  // home page
+  //
+  .sidebar {
+    float: none;
+    width: auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    .panel {
+      flex: 0 calc(33.3% - 5px);
+
+      &:nth-of-type(3n + 1),
+      &:nth-of-type(3n + 2) {
+        margin-right: 5px;
+      }
+    }
+  }
+
+  .main-column {
+    margin: 0;
+    width: calc(100% - 5px);
+
+    // allow "last 5 torrents in ..." to scroll horizontally
+    .panel {
+      &__body {
+        overflow: scroll;
+      }
+    }
+  }
+
+  // fit images to the viewport
+  .bbcode {
+    &__image {
+      max-width: 100%;
+    }
+  }
+
+  //
+  // search box
+  //
+  .search-form {
+    width: auto;
+  }
+
+  //
+  // movie list
+  //
+  .cover-movie-list {
+    &__container {
+      margin-left: 0;
+    }
+
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0;
+
+    &__movie {
+      float: none;
+      flex-basis: 25%;
+      margin: 0;
+      padding-right: 10px;
+
+      &__cover-link {
+        margin: 0 auto;
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .main-menu {
+    margin-bottom: 0; // we're hiding search bar, so remove this margin too
+
+    &__list {
+      margin-bottom: 0; // we're hiding search bar, so remove this margin too
+    }
+  }
+
+  // hide search bar on smaller viewports
+  .search-bar {
+    display: none;
+  }
+
+  // remove home and irc links
+  #nav_index,
+  #nav_irc {
+    display: none;
+  }
+
+  //
+  // home page
+  //
+  .sidebar {
+    .panel {
+      flex: 0 calc(50% - 5px);
+
+      &:nth-of-type(odd) {
+        margin-right: 5px;
+      }
+    }
+  }
+
+  //
+  // search box
+  //
+  .nobr {
+    white-space: normal;
+  }
+
+  // hide tags
+  .search-form a.form__input {
+    display: none;
+  }
+
+  // make the form look better on some page by playing with the grid
+  #collages,
+  #requests {
+    .search-form {
+      .grid-u-1-10 {
+        width: 20%;
+      }
+
+      .grid-u-9-10 {
+        width: 80%;
+      }
+
+      .grid-offset-u-1-10 {
+        margin-left: 20%;
+      }
+    }
+  }
+
+  //
+  // pagination
+  //
+  .pagination {
+    display: flex;
+    justify-content: space-between;
+    color: #000; // hide the | dividers
+    padding: 5px;
+    font-size: 12px;
+
+    &__current-page {
+      display: none;
+    }
+
+    &__link {
+      &--page {
+        display: none;
+      }
+    }
+  }
+
+  //
+  // movie list
+  //
+  .cover-movie-list {
+    &__movie {
+      flex-basis: 33.3%;
+    }
+  }
+
+  .huge-movie-list {
+    &__movie {
+      &__cover {
+        width: 150px;
+
+        &__link {
+          width: 150px;
+          height: 250px;
+          background-size: contain !important;
+        }
+      }
+
+      &__details {
+        margin-left: 150px;
+      }
+
+      &__title {
+        font-size: 2.0em;
+      }
+    }
+  }
+
+  //
+  // forum
+  //
+  .forum_index,
+  .forum_list {
+    tr {
+      th:first-child,
+      td:first-child {
+        display: none;
+      }
+    }
+
+    .forum-topic {
+      &__go-to-last-read {
+        float: none !important;
+      }
+    }
+
+    .last_topic {
+      float: none !important;
+
+      + .last_poster {
+        padding-left: 4px;
+      }
+
+      a {
+        white-space: normal !important;
+        float: none !important;
+      }
+    }
+
+    .last_poster {
+      float: none !important;
+    }
+  }
+
+  //
+  // staff reply box
+  //
+  .generic-form {
+    &--narrow {
+      max-width: 600px;
+      width: 100%;
+    }
+  }
+
+  //
+  // upload
+  //
+  #upload {
+    .page {
+      &__main-content {
+        // remove the hardcoded width value
+        .thin > div,
+        > div {
+          width: auto !important;
+        }
+      }
+    }
+
+    input[type='text'] {
+      max-width: 100%;
+    }
+
+    .panel {
+      max-height: 100%;
+    }
+
+    // this was overflowing - force the width manually
+    #AddArtistName {
+      width: 100%;
+    }
+  }
+
+  // this was overflowing - force the width manually
+  #searchthread {
+    input[type='text'] {
+      width: 100%;
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .site-logo {
+    top: 60px;
+    margin-bottom: 60px;
+  }
+
+  #userinfo {
+    &::before {
+      content: '';
+      order: 6;
+      @include flex-break;
+    }
+
+    &_username {
+      display: none;
+    }
+  }
+
+  // remove top 10 and rules link
+  #nav_top10,
+  #nav_rules {
+    display: none;
+  }
+
+  .main-menu {
+    &__item {
+      padding: 5px 3px;
+    }
+  }
+
+  // enable scrolling on panels over a certain height
+  .panel {
+    max-height: 450px;
+    overflow: scroll;
+  }
+
+  //
+  // search box
+  //
+  .form__input {
+    max-width: 100%;
+  }
+
+  //
+  // movie list
+  //
+  .basic-movie-list {
+    &__movie {
+      &__cover {
+        width: 80px;
+      }
+    }
+  }
+
+  .cover-movie-list {
+    &__movie {
+      flex-basis: 50%;
+    }
+  }
+
+  .huge-movie-list {
+    &__movie {
+      &__ratings-and-synopsis {
+        tr {
+          td:first-child {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+
+  //
+  // forum
+  //
+  .forum-post {
+    &__avatar {
+      width: 111px;
+
+      &__image {
+        max-width: 100px;
+      }
+    }
+  }
+
+  //
+  // posts / user history
+  //
+  #userhistory {
+    .forum-post {
+      &__heading {
+        > * {
+          float: none !important;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 425px) {
+  // remove user info and other links bar
+  #userinfo {
+    &_username,
+    &_minor {
+      display: none;
+    }
+  }
+
+  .site-logo {
+    top: 40px;
+    margin-bottom: 40px;
+  }
+}
