@@ -21,7 +21,9 @@
   },
   "homepage": "https://github.com/AnujRNair/basic-express-testing#readme",
   "dependencies": {
+    "@tinyspeck/slack-webpack-template-plugin": "^2.0.0-beta3",
     "express": "^4.18.2",
+    "html-webpack-plugin": "^5.5.3",
     "mini-css-extract-plugin": "^2.7.6",
     "webpack": "^5.89.0"
   },

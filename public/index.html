@@ -1,8 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <script>
+      window.wd = {
+        ok: function(...args) {
+          console.log('ok', ...args)
+        },
+        err: function(...args) {
+          console.log('err', ...args)
+        },
+        track: function(...args) {
+          console.log('track', ...args)
+        },
+      }
+    </script>
     <meta charset="utf-8" />
-    <title>Hello World</title>
+    <title>Hello Slack</title>
     <link
       rel="icon"
       href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👋</text></svg>"
@@ -11,5 +24,4 @@
   <body>
     <p>I'm the content</p>
   </body>
-  <script src="http://localhost:1988/index.bundle.js"></script>
 </html>
