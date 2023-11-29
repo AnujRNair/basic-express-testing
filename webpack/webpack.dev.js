@@ -27,12 +27,9 @@ module.exports = {
   devtool: 'inline-source-map',
 
   devServer: {
-    disableHostCheck: true,
     host: 'localhost',
     hot: true,
-    inline: false,
     port: 1988,
-    publicPath: '/',
   },
 
   module: {
