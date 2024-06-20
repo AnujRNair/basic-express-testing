@@ -1,0 +1,32 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "module": "ESNext",
+    "moduleResolution": "node",
+    "target": "ESNEXT",
+    "outDir": "./dist",
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "verbatimModuleSyntax": true,
+    "jsx": "react",
+    "types": [
+      "node"
+    ],
+    "baseUrl": "./",
+    "paths": {
+      "@backend/*": ["backend/*"],
+      "@frontend/*": ["frontend/*"]
+    }
+  },
+  "ts-node": {
+    "esm": true
+  },
+  "include": [
+    "backend",
+    "frontend"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}
